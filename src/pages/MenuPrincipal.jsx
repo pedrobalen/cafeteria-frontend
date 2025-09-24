@@ -2,8 +2,6 @@ import React from 'react';
 import { Box, Typography, Grid } from '@mui/material';
 import MenuCard from '../components/MenuCard.jsx';
 import KitchenIcon from '@mui/icons-material/Kitchen'; 
-
-// Importando os ícones que vamos usar
 import TableRestaurantIcon from '@mui/icons-material/TableRestaurant';
 import ReceiptLongIcon from '@mui/icons-material/ReceiptLong';
 import FastfoodIcon from '@mui/icons-material/Fastfood';

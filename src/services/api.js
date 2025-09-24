@@ -178,7 +178,6 @@ export const createGasto = async (gastoData) => {
 };
 
 
-// --- Funções para RELATÓRIOS ---
 export const getVendasDoDia = async () => {
     try {
         const response = await api.get('/relatorios/vendas-do-dia');
@@ -188,6 +187,51 @@ export const getVendasDoDia = async () => {
     }
 };
 
+export const getTodasMesas = async () => {
+    try {
+        const response = await api.get('/mesas');
+        return response.data;
+    } catch (error) {
+        handleError(error, "Erro ao buscar todas as mesas:");
+    }
+};
+
+export const updateMesa = async (id, mesaData) => {
+    try {
+        const response = await api.put(`/mesas/${id}`, mesaData);
+        return response.data;
+    } catch (error) {
+        handleError(error, `Erro ao atualizar mesa ${id}:`);
+    }
+};
+
+export const deleteMesa = async (id) => {
+    try {
+        await api.delete(`/mesas/${id}`);
+    } catch (error) {
+        handleError(error, `Erro ao deletar mesa ${id}:`);
+    }
+};
+
+export const setMesaAtiva = async (id, ativo) => {
+    const path = ativo ? 'ativar' : 'desativar';
+    try {
+        const response = await api.patch(`/mesas/${id}/${path}`);
+        return response.data;
+    } catch (error) {
+        handleError(error, `Erro ao alterar status da mesa ${id}:`);
+    }
+};
+
+
+export const getComandaPorId = async (comandaId) => {
+    try {
+        const response = await api.get(`/comandas/${comandaId}`);
+        return response.data;
+    } catch (error) {
+        handleError(error, `Erro ao buscar comanda ${comandaId}:`);
+    }
+};
 
 
 export default api;
