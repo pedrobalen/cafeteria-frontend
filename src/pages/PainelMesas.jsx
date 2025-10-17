@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react'; // Adicione useCallback
+import React, { useState, useEffect, useCallback } from 'react';
 import { Box, Typography, Grid, CircularProgress, Alert } from '@mui/material';
 import CardMesa from '../components/CardMesa.jsx';
 import { getMesasAtivas, getComandasAbertas } from '../services/api.js';
@@ -24,9 +24,8 @@ const PainelMesas = () => {
         } finally {
             setLoading(false);
         }
-    }, []); // O array vazio [] significa que esta função nunca mudará
+    }, []);
 
-    // O useEffect agora apenas chama a função que já existe
     useEffect(() => {
         fetchData();
     }, [fetchData]);
@@ -55,12 +54,13 @@ const PainelMesas = () => {
                     {mesas.map((mesa) => {
                         const comandaDaMesa = comandasAbertas.find(c => c.numeroMesa === mesa.numero);
                         return (
-                            <Grid item key={mesa.id} xs={12} sm={6} md={4} lg={3}>
+                            // A CORREÇÃO ESTÁ AQUI: a propriedade "item" foi removida.
+                            <Grid key={mesa.id} xs={12} sm={6} md={4} lg={3}>
                                 <CardMesa
                                     mesa={mesa}
                                     status={comandaDaMesa ? 'OCUPADA' : 'LIVRE'}
                                     comanda={comandaDaMesa}
-                                    onComandaAberta={fetchData} // Agora a função está acessível aqui
+                                    onComandaAberta={fetchData}
                                 />
                             </Grid>
                         );

@@ -1,9 +1,8 @@
 import React from 'react';
 import { Card, CardActionArea, CardContent, Typography, Box } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import { abrirComanda } from '../services/api';
+import { abrirComanda } from '../services/api'; // Certifique-se que esta função existe no seu api.js
 
-// Adicionamos a propriedade onComandaAberta
 const CardMesa = ({ mesa, status, comanda, onComandaAberta }) => {
     const navigate = useNavigate();
     const isOcupada = status === 'OCUPADA';
@@ -21,7 +20,7 @@ const CardMesa = ({ mesa, status, comanda, onComandaAberta }) => {
 
     const handleClick = async () => {
         if (isOcupada) {
-            // Se a mesa está ocupada, simplesmente navega para a comanda existente
+            // Se a mesa está ocupada, navega para a comanda existente
             navigate(`/comanda/${comanda.id}`);
         } else {
             // Se a mesa está livre, abre uma nova comanda
@@ -29,11 +28,11 @@ const CardMesa = ({ mesa, status, comanda, onComandaAberta }) => {
                 try {
                     const novaComanda = await abrirComanda({ mesaId: mesa.id });
                     if (novaComanda) {
-                        onComandaAberta(); // Avisa o painel para recarregar a lista de comandas
-                        navigate(`/comanda/${novaComanda.id}`); // Navega para a tela da nova comanda
+                        onComandaAberta(); // Avisa o painel para se atualizar
+                        navigate(`/comanda/${novaComanda.id}`); // Navega para a nova comanda
                     }
                 } catch (error) {
-                    alert("Falha ao abrir nova comanda. Verifique o console para mais detalhes.");
+                    alert("Falha ao abrir nova comanda. Tente novamente.");
                 }
             }
         }

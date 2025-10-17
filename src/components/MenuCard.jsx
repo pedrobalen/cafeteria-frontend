@@ -20,7 +20,7 @@ const MenuCard = ({ title, description, linkTo, icon }) => {
     };
 
     return (
-        <Grid item xs={12} sm={6} md={4}>
+        <Grid xs={12} sm={6} md={4}>
             <Card sx={cardStyle} onClick={() => navigate(linkTo)}>
                 <CardActionArea>
                     <CardContent>
